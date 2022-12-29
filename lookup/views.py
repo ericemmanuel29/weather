@@ -10,8 +10,27 @@ def home(request):
         api = json.loads(api_requests.content)
     except Exception as e:
         api = "Error..."
+    
+    if api[0]['Category']['Name'] == "Good":
+        category_description = "Air quality is considered good good."
+        category_color = 'good'
+    elif api[0]['Category']['Name'] == "Moderate":
+        category_description = "Air quality is considered aight."
+        category_color = 'moderate'
+    elif api[0]['Category']['Name'] == "Unhealthy for Sensitive Groups":
+        category_description = "Air quality is considered stay at home."
+        category_color = 'usg'
+    elif api[0]['Category']['Name'] == "Unhealthy":
+        category_description = "Air quality is considered don't go outside."
+        category_color = 'unhealthy'
+    elif api[0]['Category']['Name'] == "Very Unhealthy":
+        category_description = "Air quality is for real bro?"
+        category_color = 'veryUnhealthy'
+    elif api[0]['Category']['Name'] == "Hazardous":
+        category_description = "Air quality is ayo."
+        category_color = 'hazardous'
 
-    return render(request, 'home.html', {'api': api})
+    return render(request, 'home.html', {'api': api, 'category_description': category_description, 'category_color': category_color})
 
 def about(request):
     return render(request, 'about.html', {})
