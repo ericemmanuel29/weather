@@ -33,4 +33,12 @@ def home(request):
     return render(request, 'home.html', {'api': api, 'category_description': category_description, 'category_color': category_color})
 
 def about(request):
+    import requests
+
+    if request.method == "POST":
+        originalText = request.POST['lisper']
+        return render(request, 'about.html', {'originalText': originalText})
+    else: #GET
+        pass
+
     return render(request, 'about.html', {})
